@@ -12,6 +12,4 @@ public class Car {
         this.engine = engine;
     }
 }
-Sun Jun 30 22:40:53 2024 +0900
-8aaa3873f732a614877afc38c74cf4e089ba9f48
 
