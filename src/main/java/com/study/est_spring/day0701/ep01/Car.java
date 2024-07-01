@@ -1,4 +1,4 @@
-package com.study.est_spring.day0628.ep2;
+package com.study.est_spring.day0701.ep01;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
