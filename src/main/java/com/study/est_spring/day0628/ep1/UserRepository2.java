@@ -3,7 +3,7 @@ package com.study.est_spring.day0628.ep1;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserRepository implements UserRepositoryInterface {
+public class UserRepository2 implements UserRepositoryInterface {
 
     @Override
     public void save(User user) {
