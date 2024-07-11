@@ -1,8 +1,10 @@
 package com.study.est_spring.day0628.ep1;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Primary
 public class UserRepository1 implements UserRepositoryInterface {
 
     @Override
