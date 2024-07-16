@@ -48,4 +48,39 @@ public class PostController {
         model.addAttribute("post", post);
         return "post/detail";
     }
+
+    @PostMapping("/{id}/delete")
+    public String delete(
+            @PathVariable("id") Long id
+    ) {
+        posts.removeIf(post -> post.getId() == id);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editPostForm(
+            @PathVariable("id") Long id,
+            Model model
+    ) {
+        Post post = posts.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+        model.addAttribute("post", post);
+        return "/post/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editPost(
+            @PathVariable("id") Long id,
+            @ModelAttribute Post updatedPost
+    ) {
+        Post post = posts.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+        post.setTitle(updatedPost.getTitle());
+        post.setContent(updatedPost.getContent());
+        return "redirect:/posts/{id}";
+    }
 }
