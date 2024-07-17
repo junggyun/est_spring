@@ -1,4 +1,4 @@
-package com.study.est_spring.restapi;
+package com.study.est_spring.day0716;
 
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.study.est_spring.restapi;
+package com.study.est_spring.day0717.ep01;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    private Long id;
+public class Member {
+    private long id;
     private String name;
-    private String password;
+    private String email;
 }
