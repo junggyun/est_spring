@@ -14,6 +14,7 @@ public class BoardPostService {
 
     public BoardPostDto createBoardPost(BoardPostDto boardPostDto) {
         BoardPost boardPost = convertToBoardPostEntity(boardPostDto);
+        return convertToBoardPostDto(boardPost);
     }
 
     private BoardPost convertToBoardPostEntity(BoardPostDto boardPostDto) {
