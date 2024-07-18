@@ -1,5 +1,6 @@
 package com.study.est_spring.day0717.ep02;
 
+import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,11 +10,14 @@ import java.util.stream.Collectors;
 @Service
 public class BoardPostService {
     List<BoardPost> boardPosts = new ArrayList<>();
-    private Long nextId = 1L;
+    private Long nextBoardPostId = 1L;
     private Long nextCommentId = 1L;
 
     public BoardPostDto createBoardPost(BoardPostDto boardPostDto) {
         BoardPost boardPost = convertToBoardPostEntity(boardPostDto);
+        boardPost.setId(nextBoardPostId++);
+        boardPost.setCreatedAt(LocalDateTime.now());
+        boardPosts.add(boardPost);
         return convertToBoardPostDto(boardPost);
     }
 
@@ -22,6 +26,7 @@ public class BoardPostService {
         boardPost.setTitle(boardPostDto.getTitle());
         boardPost.setContent(boardPostDto.getContent());
         boardPost.setAuthor(boardPostDto.getAuthor());
+        boardPost.setCreatedAt(boardPostDto.getCreatedAt());
         if (boardPostDto.getComments() != null) {
             boardPostDto.getComments().forEach(commentDto -> {
                 Comment comment = convertToCommentEntity(commentDto);
@@ -32,21 +37,13 @@ public class BoardPostService {
         return boardPost;
     }
 
-    private Comment convertToCommentEntity(CommentDto commentDto) {
-        Comment comment = new Comment();
-        comment.setId(commentDto.getId());
-        comment.setAuthor(commentDto.getAuthor());
-        comment.setContent(commentDto.getContent());
-
-        return comment;
-    }
-
     private BoardPostDto convertToBoardPostDto(BoardPost boardPost) {
         BoardPostDto boardPostDto = new BoardPostDto();
         boardPostDto.setId(boardPost.getId());
         boardPostDto.setTitle(boardPost.getTitle());
         boardPostDto.setContent(boardPost.getContent());
         boardPostDto.setAuthor(boardPost.getAuthor());
+        boardPostDto.setCreatedAt(boardPost.getCreatedAt());
         if (boardPost.getComments() != null) {
             boardPostDto.setComments(
                     boardPost.getComments().stream()
@@ -55,6 +52,15 @@ public class BoardPostService {
             );
         }
         return boardPostDto;
+    }
+
+    private Comment convertToCommentEntity(CommentDto commentDto) {
+        Comment comment = new Comment();
+        comment.setId(commentDto.getId());
+        comment.setAuthor(commentDto.getAuthor());
+        comment.setContent(commentDto.getContent());
+
+        return comment;
     }
 
     private CommentDto convertToCommentDto(Comment comment) {
